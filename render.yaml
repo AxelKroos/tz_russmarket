@@ -1,0 +1,25 @@
+services:
+    - type: web
+      name: tz-russmarket
+      runtime: node
+      plan: free
+      region: frankfurt
+      buildCommand: npm ci --include=dev && npm run build
+      startCommand: npm start
+      healthCheckPath: /api/health
+      autoDeployTrigger: 'off'
+      envVars:
+          - key: HOST
+            value: 0.0.0.0
+          - key: DEMO_DATA
+            value: '1'
+          - key: DATABASE_URL
+            fromDatabase:
+                name: tz-russmarket-db
+                property: connectionString
+
+databases:
+    - name: tz-russmarket-db
+      plan: free
+      region: frankfurt
+      ipAllowList: []
