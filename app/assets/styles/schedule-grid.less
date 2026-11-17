@@ -1,0 +1,246 @@
+.ScheduleGrid {
+    --employee-width: 164px;
+    --week-day-width: 76px;
+    max-height: 456px;
+    overflow: auto;
+    scrollbar-width: thin;
+
+    @media @tablet {
+        --employee-width: 220px;
+        --week-day-width: 89px;
+        max-height: 648px;
+    }
+
+    @media @wide {
+        --week-day-width: 98px;
+    }
+}
+
+.ScheduleGrid-table {
+    width: 100%;
+    table-layout: fixed;
+    border-spacing: 0;
+    font-size: 16px;
+
+    &--week {
+        min-width: calc(var(--employee-width) + 7 * var(--week-day-width));
+    }
+
+    &--month .ScheduleGrid-dateColumn {
+        width: 64px;
+    }
+
+    &--month .ScheduleGrid-date span {
+        display: block;
+    }
+
+    &--month .ScheduleGrid-interval {
+        display: none;
+    }
+
+    th,
+    td {
+        padding: 0;
+        font-weight: 400;
+        text-align: center;
+    }
+
+    thead th,
+    tfoot th,
+    tfoot td {
+        position: sticky;
+        z-index: @z-index-sticky;
+        min-height: 48px;
+        background: @colors-main-white;
+    }
+
+    thead th {
+        top: 0;
+        border-bottom: 1px solid @colors-main-line;
+    }
+
+    tfoot th,
+    tfoot td {
+        bottom: 0;
+        height: 48px;
+        border-top: 1px solid @colors-main-line;
+    }
+
+    tfoot td {
+        background: @colors-status-error-wash;
+        color: @colors-status-error;
+
+        &.isCovered {
+            background: @colors-brand-wash;
+            color: @colors-brand-text;
+        }
+    }
+
+    tbody tr:nth-child(even) > * {
+        background: @colors-main-row;
+    }
+
+    tbody td {
+        height: 72px;
+        padding: 4px;
+
+        &.isSelected {
+            background: @colors-brand-wash;
+            box-shadow: inset 0 0 0 1px @colors-brand-fill;
+        }
+    }
+
+    tbody .ScheduleGrid-rowLabel {
+        z-index: @z-index-sticky;
+        padding-left: 8px;
+        color: @colors-main-text;
+    }
+
+    thead .ScheduleGrid-rowLabel,
+    tfoot .ScheduleGrid-rowLabel {
+        z-index: @z-index-grid-corner;
+    }
+
+    .ScheduleGrid-rowLabel {
+        position: sticky;
+        left: 0;
+        padding-inline: 12px 8px;
+        color: @colors-main-muted;
+        background: @colors-main-white;
+        text-align: start;
+    }
+}
+
+.ScheduleGrid-employeeColumn {
+    width: var(--employee-width);
+}
+
+.ScheduleGrid-date {
+    display: block;
+    width: 100%;
+    min-height: 47px;
+    padding: 5px 2px;
+    border: 0;
+    color: @colors-main-muted;
+    background: transparent;
+    font-size: 14px;
+}
+
+button.ScheduleGrid-date:hover:enabled {
+    background: @colors-brand-wash;
+    color: @colors-brand-text;
+}
+
+.ScheduleGrid-employee {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.ScheduleGrid-avatar {
+    flex: none;
+    width: 40px;
+    height: 40px;
+    border-radius: 4px;
+    background: @colors-main-row;
+    object-fit: cover;
+
+    &--placeholder {
+        object-fit: scale-down;
+    }
+}
+
+.ScheduleGrid-employeeDetails {
+    min-width: 0;
+
+    > span {
+        display: block;
+        font-size: 14px;
+
+        @media @tablet {
+            overflow: hidden;
+            white-space: nowrap;
+            text-overflow: ellipsis;
+            font-size: 16px;
+        }
+    }
+
+    small {
+        display: block;
+        color: @colors-main-muted;
+        font-size: 12px;
+    }
+}
+
+.ScheduleGrid-cell {
+    .interactive();
+    .shift-variants();
+    display: grid;
+    grid-template-columns: minmax(0, 1fr);
+    place-content: center;
+    justify-items: center;
+    width: 100%;
+    min-height: 64px;
+    padding: 2px;
+    border: 1px solid transparent;
+    border-radius: 8px;
+    color: @colors-main-text;
+    background: var(--shift-background, transparent);
+    font-size: 14px;
+    line-height: 1.15;
+    text-align: center;
+
+    @media @tablet {
+        line-height: 1.35;
+    }
+
+    &--empty {
+        border: 1px dashed @colors-main-cell-line;
+    }
+
+    &--custom {
+        color: @colors-main-white;
+    }
+
+    .isSelected & {
+        border-color: transparent;
+    }
+}
+
+button.ScheduleGrid-cell:enabled:hover {
+    border-color: @colors-brand-fill;
+}
+
+.ScheduleGrid-interval {
+    max-width: 100%;
+    font-size: 13px;
+    text-wrap: balance;
+
+    @media @wide {
+        font-size: 14px;
+    }
+}
+
+.ScheduleGrid-duration {
+    max-width: 100%;
+    color: var(--shift-label, @colors-main-text);
+    font-size: 12px;
+
+    .ScheduleGrid-table--month & {
+        font-size: 14px;
+    }
+}
+
+.ScheduleGrid-add {
+    visibility: hidden;
+
+    :is(.isSelected, button.ScheduleGrid-cell:hover, button.ScheduleGrid-cell:focus-visible) & {
+        visibility: visible;
+    }
+}
+
+.ScheduleGrid td.ScheduleGrid-empty {
+    padding: 30px 12px;
+    color: @colors-main-muted;
+    text-align: start;
+}

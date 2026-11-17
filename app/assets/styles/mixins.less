@@ -1,0 +1,37 @@
+.focus-ring() {
+    outline: 2px solid @colors-brand-text;
+    outline-offset: -2px;
+}
+
+.interactive() {
+    transition: background-color @transition-default ease;
+
+    @media @reduced-motion {
+        transition: none;
+    }
+}
+
+.shift-variants() {
+    &--morning {
+        --shift-background: @colors-brand-wash;
+        --shift-border: @colors-brand-border;
+        --shift-label: @colors-brand-text;
+    }
+
+    &--day {
+        --shift-background: @colors-shift-day;
+        --shift-border: @colors-shift-day-border;
+        --shift-label: @colors-shift-day-text;
+    }
+
+    &--evening {
+        --shift-background: @colors-shift-evening;
+        --shift-border: @colors-shift-evening-border;
+        --shift-label: @colors-shift-evening-text;
+    }
+
+    &--custom {
+        --shift-background: @colors-brand-button;
+        --shift-label: @colors-main-white;
+    }
+}

@@ -1,0 +1,218 @@
+.ShiftPanel {
+    min-width: 0;
+    padding: 16px;
+    border-radius: 8px;
+    background: @colors-main-white;
+
+    h2 {
+        margin: 0 0 8px;
+        font-size: 16px;
+        font-weight: 500;
+        line-height: 24px;
+    }
+}
+
+.ShiftPanel-templates {
+    display: grid;
+    gap: 4px;
+    margin-bottom: 24px;
+}
+
+.ShiftPanel-template {
+    .interactive();
+    .shift-variants();
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+    min-height: 64px;
+    padding: 8px 14px;
+    border: 0;
+    border-left: 2px solid var(--shift-border);
+    border-radius: 8px;
+    color: @colors-main-text;
+    background: @colors-main-canvas;
+    text-align: start;
+
+    &:enabled:hover {
+        background: var(--shift-background);
+    }
+
+    kbd {
+        position: absolute;
+        top: 8px;
+        right: 8px;
+        min-width: 20px;
+        padding: 1px 4px;
+        border-radius: 4px;
+        background: @colors-main-white;
+        font: inherit;
+        font-size: 12px;
+        text-align: center;
+    }
+}
+
+.ShiftPanel-templateName {
+    font-weight: 650;
+}
+
+.ShiftPanel-form,
+.ShiftMenu-editor {
+    display: grid;
+    gap: 8px;
+}
+
+.ShiftPanel-times {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 8px;
+
+    label {
+        display: grid;
+        gap: 4px;
+        color: @colors-main-muted;
+        font-size: 12px;
+    }
+
+    input {
+        min-width: 0;
+        width: 100%;
+        min-height: 48px;
+        padding: 8px;
+        border: 0;
+        border-radius: 8px;
+        background: @colors-main-canvas;
+        color: @colors-main-text;
+        font-size: 16px;
+
+        &:not(:hover):not(:focus)::-webkit-calendar-picker-indicator {
+            opacity: 0;
+        }
+
+        @media @wide {
+            padding-inline: 16px;
+        }
+    }
+}
+
+.ShiftPanel-form > .Button {
+    padding-inline: 6px;
+    font-size: 14px;
+
+    @media @wide {
+        font-size: 16px;
+    }
+}
+
+.FormError {
+    margin: 0;
+    color: @colors-status-error;
+    font-size: 13px;
+}
+
+.ShiftMenu {
+    position: fixed;
+    z-index: @z-index-overlay;
+    width: min(320px, calc(100vw - 24px));
+    max-height: calc(100dvh - 24px);
+    padding: 12px;
+    overflow: auto;
+    border: 1px solid @colors-main-line;
+    border-radius: 12px;
+    background: @colors-main-white;
+    box-shadow: 0 8px 28px @colors-main-shadow;
+}
+
+.ShiftMenu-header,
+.ShiftMenu-actions {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 8px;
+}
+
+.ShiftMenu-header {
+    margin-bottom: 8px;
+    font-size: 14px;
+
+    button {
+        min-width: 32px;
+        min-height: 32px;
+        padding: 0;
+        border: 0;
+        border-radius: 6px;
+        background: @colors-main-canvas;
+        font-size: 20px;
+    }
+}
+
+.ShiftMenu-templateOptions {
+    display: grid;
+    gap: 4px;
+}
+
+.ShiftMenu-templateOption {
+    .shift-variants();
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 8px;
+    min-height: 40px;
+    padding: 6px 10px;
+    border: 0;
+    border-radius: 6px;
+    color: @colors-main-text;
+    background: var(--shift-background);
+
+    &:disabled {
+        opacity: 0.55;
+    }
+}
+
+.ShiftMenu-employees {
+    display: grid;
+    gap: 4px;
+    max-height: 192px;
+    margin: 0 0 10px;
+    padding: 6px;
+    overflow: auto;
+    border: 1px solid @colors-main-line;
+    border-radius: 8px;
+    font-size: 14px;
+
+    label {
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        min-height: 30px;
+    }
+}
+
+.ShiftMenu-editor {
+    margin-bottom: 12px;
+}
+
+.ShiftMenu-multiSelect {
+    width: 100%;
+    min-height: 40px;
+    margin-top: 8px;
+    border: 0;
+    border-radius: 6px;
+    background: @colors-main-canvas;
+    color: @colors-main-text;
+    font-size: 13px;
+}
+
+.ShiftMenu-actions .Button,
+.ShiftMenu-remove {
+    min-height: 40px;
+    padding: 6px 8px;
+    font-size: 13px;
+}
+
+.ShiftMenu-remove {
+    border: 0;
+    border-radius: 6px;
+    background: @colors-status-error-wash;
+    color: @colors-status-error;
+}
