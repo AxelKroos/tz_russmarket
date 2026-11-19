@@ -12,8 +12,8 @@ npm ci
 npm run dev
 ```
 
-Откройте [редактор](http://127.0.0.1:5173) или
-[опубликованный график](http://127.0.0.1:5173/?view=published). Без
+Откройте [редактор(указан prod)](https://axelkroos-tz-russmarket-8e3b.twc1.net/) или
+[опубликованный график(указан prod)](https://axelkroos-tz-russmarket-8e3b.twc1.net/?view=published). Без
 `DATABASE_URL` сервер использует PGlite с PostgreSQL и сохраняет данные
 в `.data/schedule`. При первом запуске добавляются сотрудники из макета.
 
